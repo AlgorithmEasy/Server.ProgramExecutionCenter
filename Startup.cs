@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using AlgorithmEasy.Server.ProgramExecutionCenter.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -64,6 +65,8 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter
                                 Environment.GetEnvironmentVariable("ALGORITHMEASY_SECURITY_TOKENS_KEY")!))
                     };
                 });
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,6 +88,7 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PythonExecuteHub>("/PythonExecutor");
             });
         }
     }
