@@ -22,7 +22,10 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ALGORITHMEASY_SECURITY_TOKENS_ISSUER": "AlgorithmEasyServer",
+        "ALGORITHMEASY_SECURITY_TOKENS_AUDIENCE": "AlgorithmEasyAudience",
+        "ALGORITHMEASY_SECURITY_TOKENS_KEY": "WaecKZXBnqkoA2AJDK7Cpyjvpf8m17QR"
       },
       "applicationUrl": "https://localhost:9001;http://localhost:9000",
       "dotnetRunMessages": "true"
