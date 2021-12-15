@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplements
 {
@@ -18,7 +17,7 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplement
 #nullable disable
         public event EventHandler<int> Exited;
 
-        public virtual async Task<int> Run()
+        public virtual int Run()
         {
             if (_process != null || string.IsNullOrEmpty(Program)) return -1;
 
@@ -45,14 +44,15 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplement
             _process.BeginErrorReadLine();
             _process.BeginOutputReadLine();
 
-            await _process.WaitForExitAsync();
+            var exit = _process.WaitForExit(60 * 1000);
+            if (!exit) _process.Kill();
             return _process.ExitCode;
         }
 
-        public async Task<int> Run(IEnumerable<string> args)
+        public int Run(IEnumerable<string> args)
         {
             Args = args;
-            return await Run();
+            return Run();
         }
 
         public void Stop() => _process.Kill();

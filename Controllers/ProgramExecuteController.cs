@@ -28,7 +28,7 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter.Controllers
             process.ErrorDataReceived += SendError;
             process.Exited += SendExit;
 
-            var exitCode = await process.Run(request.Code);
+            var exitCode = process.Run(request.Code);
             return Ok(exitCode);
         }
 

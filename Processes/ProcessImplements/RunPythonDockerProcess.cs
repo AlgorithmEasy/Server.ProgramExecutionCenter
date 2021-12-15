@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplements
+﻿namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplements
 {
     public class RunPythonDockerProcess : DockerProcess, IRunPythonProcess
     {
@@ -9,10 +7,10 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplement
             Image = "python:3.8-alpine";
         }
 
-        public async Task<int> Run(string code)
+        public int Run(string code)
         {
             Cmd = new[] { "python3", "-u", "-c", code };
-            return await Run();
+            return Run();
         }
     }
 }

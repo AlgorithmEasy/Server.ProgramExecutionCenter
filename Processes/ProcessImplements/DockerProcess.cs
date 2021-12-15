@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplements
 {
@@ -17,7 +16,7 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplement
 #nullable disable
         public event EventHandler<int> Exited;
 
-        public async Task<int> Run()
+        public int Run()
         {
             if (_process != null) return -1;
 
@@ -34,14 +33,14 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplement
             _process.ErrorDataReceived += (sender, s) => ErrorDataReceived?.Invoke(sender, s);
             _process.Exited += (sender, i) => Exited?.Invoke(sender, i);
 
-            return await _process.Run();
+            return _process.Run();
         }
 
-        public async Task<int> Run(string image, IEnumerable<string> cmd)
+        public int Run(string image, IEnumerable<string> cmd)
         {
             Image = image;
             Cmd = cmd;
-            return await Run();
+            return Run();
         }
     }
 }
