@@ -11,7 +11,7 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplement
 
         public async Task<int> Run(string code)
         {
-            Cmd = new[] { "python3", "-c", code };
+            Cmd = new[] { "python3", "-u", "-c", code };
             return await Run();
         }
     }
