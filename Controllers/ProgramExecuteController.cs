@@ -53,7 +53,7 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter.Controllers
             try
             {
                 await _pythonHubContext.Clients.User(UserId)
-                    .SendAsync("ReceiveOutput", $"<span class=\"text-red\">{error}</span>\n");
+                    .SendAsync("ReceiveOutput", $"<span class=\"text-danger\">{error}</span>\n");
             }
             catch
             {
