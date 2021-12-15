@@ -7,10 +7,11 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["Server.ProgramExecutionCenter/Server.ProgramExecutionCenter.csproj", "Server.ProgramExecutionCenter/"]
-RUN dotnet restore "Server.ProgramExecutionCenter/Server.ProgramExecutionCenter.csproj"
+COPY ["Server.ProgramExecutionCenter.csproj", "."]
+RUN --mount=type=secret,id=package_token \
+    TOKEN=`cat /run/secrets/package_token` && \
+    dotnet nuget add source --username AlgorithmEasy --password $TOKEN --store-password-in-clear-text --name github "https://nuget.pkg.github.com/AlgorithmEasy/index.json"
 COPY . .
-WORKDIR "/src/Server.ProgramExecutionCenter"
 RUN dotnet build "Server.ProgramExecutionCenter.csproj" -c Release -o /app/build
 
 FROM build AS publish
@@ -19,4 +20,4 @@ RUN dotnet publish "Server.ProgramExecutionCenter.csproj" -c Release -o /app/pub
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Server.ProgramExecutionCenter.dll"]
+ENTRYPOINT ["dotnet", "AlgorithmEasy.Server.ProgramExecutionCenter.dll"]
