@@ -83,6 +83,7 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AlgorithmEasy.Server.ProgramExecutionCenter.Hubs;
 using AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplements;
 using AlgorithmEasy.Shared.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -12,6 +13,7 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter.Controllers
 {
     [Route("[controller]/[action]")]
     [ApiController]
+    [Authorize(Roles = "Student")]
     public class ProgramExecuteController : ControllerBase
     {
         private readonly IHubContext<PythonExecuteHub> _pythonHubContext;
