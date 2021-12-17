@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 
 namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplements
 {
@@ -28,7 +29,9 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter.Processes.ProcessImplement
                     FileName = Program,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
+                    StandardErrorEncoding = Encoding.UTF8,
                     RedirectStandardError = true,
+                    StandardOutputEncoding = Encoding.UTF8,
                     CreateNoWindow = true
                 },
                 EnableRaisingEvents = true

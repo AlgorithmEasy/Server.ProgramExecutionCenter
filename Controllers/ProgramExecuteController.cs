@@ -18,8 +18,6 @@ namespace AlgorithmEasy.Server.ProgramExecutionCenter.Controllers
     {
         private readonly IHubContext<PythonExecuteHub> _pythonHubContext;
 
-        private string UserId => User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
         public ProgramExecuteController(IHubContext<PythonExecuteHub> pythonHubContext) => _pythonHubContext = pythonHubContext;
 
         [HttpPost]
